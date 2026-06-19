@@ -1,0 +1,38 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Shiraseru.Models;
+
+[Table("ErroresLLM")]
+public class TicketSoporte
+{
+    [Key]
+    public int Id { get; set; }
+
+    [Required]
+    [StringLength(50)]
+    public string CodigoError { get; set; } = string.Empty;
+
+    [Required]
+    [StringLength(250)]
+    public string DescripcionBreve { get; set; } = string.Empty;
+
+    [Required]
+    [StringLength(100)]
+    public string Categoria { get; set; } = string.Empty;
+
+    [Required]
+    [Column(TypeName = "varchar(max)")] // Mapeo explícito a VARCHAR(MAX)
+    public string SolucionTexto { get; set; } = string.Empty;
+
+    [Required]
+    [Column(TypeName = "varchar(max)")] // Mapeo explícito a VARCHAR(MAX)
+    public string EmbeddingJson { get; set; } = string.Empty;
+}
+
+// Esta clase secundaria para la caché 
+public class TicketMemoryCache
+{
+    public int Id { get; set; }
+    public float[] Vector { get; set; } = Array.Empty<float>();
+}

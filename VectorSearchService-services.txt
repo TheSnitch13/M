@@ -1,0 +1,50 @@
+using Shiraseru.Models;
+
+namespace Shiraseru.Services;
+
+public class VectorSearchService
+{
+    private readonly EmbeddingStorageService _storageService;
+
+    public VectorSearchService(EmbeddingStorageService storageService)
+    {
+        _storageService = storageService;
+    }
+
+    public int? BuscarMejorMatch(float[] vectorPregunta, float umbralMinimo = 0.80f)
+    {
+        var cache = _storageService.GetCachedVectors();
+        if (!cache.Any()) return null;
+
+        int mejorId = -1;
+        double maximaSimilitud = -1.0;
+
+        foreach (var item in cache)
+        {
+            double similitud = CalcularSimilitudCoseno(vectorPregunta, item.Vector);
+            if (similitud > maximaSimilitud)
+            {
+                maximaSimilitud = similitud;
+                mejorId = item.Id;
+            }
+        }
+
+        return maximaSimilitud >= umbralMinimo ? mejorId : null;
+    }
+
+    private static double CalcularSimilitudCoseno(float[] vectorA, float[] vectorB)
+    {
+        if (vectorA.Length != vectorB.Length) return 0.0;
+
+        double productoPunto = 0.0, normaA = 0.0, normaB = 0.0;
+        for (int i = 0; i < vectorA.Length; i++)
+        {
+            productoPunto += vectorA[i] * vectorB[i];
+            normaA += vectorA[i] * vectorA[i];
+            normaB += vectorB[i] * vectorB[i];
+        }
+
+        if (normaA == 0.0 || normaB == 0.0) return 0.0;
+        return productoPunto / (Math.Sqrt(normaA) * Math.Sqrt(normaB));
+    }
+}

@@ -1,0 +1,58 @@
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Shiraseru.Data;
+using Shiraseru.Models;
+
+namespace Shiraseru.Services;
+
+public class EmbeddingStorageService
+{
+    private readonly IServiceScopeFactory _scopeFactory;
+    private List<TicketMemoryCache> _vectorCache = new();
+    private readonly ILogger<EmbeddingStorageService> _logger;
+
+    public EmbeddingStorageService(IServiceScopeFactory scopeFactory, ILogger<EmbeddingStorageService> logger)
+    {
+        _scopeFactory = scopeFactory;
+        _logger = logger;
+    }
+
+    public IReadOnlyList<TicketMemoryCache> GetCachedVectors() => _vectorCache.AsReadOnly();
+
+    public async Task CargarEmbeddingsEnMemoriaAsync()
+    {
+        _logger.LogInformation("Cargando embeddings desde SQL Server Developer a la RAM...");
+        
+        using var scope = _scopeFactory.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>(); 
+
+        var ticketsDb = await context.TicketsSoporte
+            .AsNoTracking()
+            .Select(t => new { t.Id, t.EmbeddingJson })
+            .ToListAsync();
+
+        var nuevoCache = new List<TicketMemoryCache>();
+
+        foreach (var ticket in ticketsDb)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(ticket.EmbeddingJson))
+                {
+                    var vector = JsonSerializer.Deserialize<float[]>(ticket.EmbeddingJson);
+                    if (vector != null)
+                    {
+                        nuevoCache.Add(new TicketMemoryCache { Id = ticket.Id, Vector = vector });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al parsear embedding del ID {Id}", ticket.Id);
+            }
+        }
+
+        _vectorCache = nuevoCache;
+        _logger.LogInformation("¡Éxito! {Count} vectores cargados en RAM.", _vectorCache.Count);
+    }
+}
