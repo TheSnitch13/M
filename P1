@@ -1,0 +1,57 @@
+CURRENT STATE (El Gancho / Resumen Ejecutivo)
+
+Declaración del Problema: La dependencia crítica del departamento de Ingeniería para la resolución de fallas operativas en el sistema ACURA genera cuellos de botella, incrementa el MTTR (Mean Time to Repair) y penaliza la eficiencia global de los equipos (OEE).
+
+1. Brecha de Rendimiento Actual (Performance Gaps)
+
+Saturación del Talento Senior: Fuga de horas-hombre de ingeniería en tareas de soporte técnico de nivel 1 y 2 (diagnósticos repetitivos de JabilEye, SCRUM y MES), impactando directamente en sus entregables estratégicos y KPIs de estrés laboral.
+Vulnerabilidad Operativa: El personal técnico en línea carece de una herramienta de autogestión ágil para interpretar la diversidad de códigos de error de ACURA, lo que prolonga el tiempo muerto en producción (*Downtime*).
+Oportunidad de Optimización: Democratizar el acceso al conocimiento técnico documentado mediante un motor de IA, transformando fallas complejas en soluciones autogestionables en piso de manera inmediata.
+
+---
+
+CURRENT STATE PLAN (Detalle y Marcos de Trabajo)
+
+I. Definición del Problema y Alineación Estratégica
+
+Para justificar la viabilidad de este proyecto de cara a la estrategia global de Jabil, aplicamos la metodología 5W2H:
+
+Variable Descripción Técnica
+Who (Quién) Técnicos de soporte en piso de producción e Ingenieros Senior (afectados por sobrecarga). 
+What (Qué) Integración de un Asistente Virtual (Chatbot con IA) dentro del ecosistema ACURA. 
+Where (Dónde) Líneas de producción que operan bajo los entornos JabilEye, SCRUM y MES. 
+When (Cuándo) Ante eventos de paro de máquina, fallas de torque, escaneo o pérdida de conexión. 
+Why (Por qué) Para reducir el impacto financiero del tiempo muerto y optimizar el Workforce Allocation. 
+How (Cómo) Consumiendo la base de datos de errores documentados mediante procesamiento de lenguaje natural (NLP). 
+How Much (Cuánto) [Insertar estimación de reducción de horas de paro o costo actual del downtime]. 
+
+Objetivo del Proyecto (Goal):Desarrollar e integrar un Chatbot con IA en el sistema ACURA para resolver el [X]% de las fallas críticas de manera autónoma por parte de los técnicos en el Q[X] de 2026.
+Alcance (*Scope*): Errores de escaneo (JabilEye), lógica/procesos (SCRUM), conectividad y control de torque (MES). Quedan fuera del alcance fallas de hardware mayor.
+
+---
+
+II. Indicadores Clave y Estructura del Proceso
+
+Métricas KPI del Proceso
+
+Baseline (Línea Base): MTTR promedio actual de [X] horas por falla compleja.
+Entitlement (Capacidad Ideal): Resolución inmediata (< 5 minutos) si el error está documentado.
+Goal (Meta del Proyecto): Reducción del [X]% del tiempo de paro y 0% de escalación a ingeniería en errores conocidos.
+
+Mapeo de Variables: SIPOC Estructurado
+
+Suppliers (Proveedores): Base de datos histórica de Jabil, Ingenieros Senior (SMEs), Logs de ACURA.
+Inputs (Entradas): Código de error, descripción de la falla en lenguaje natural, logs de JabilEye/MES.
+Process (Proceso): 1. Registro del error en ACURA  2. Consulta al Chatbot IA  3. Diagnóstico guiado  4. Ejecución de la solución por el técnico.
+Outputs (Salidas): Diagnóstico preciso, plan de acción paso a paso, registro de efectividad de la solución.
+Customers (Clientes): Técnicos de línea (usuario directo), Supervisores de producción (beneficiarios de OEE).
+
+Plan Performance vs. Actual Performance (Estrategia NPI)
+
+Actualmente, el proceso de New Product Introduction (NPI) y soporte sufre retrasos debido a que las curvas de aprendizaje de los técnicos ante nuevos sistemas son lentas. La introducción de este Asistente con IA estabilizará la fase de soporte posterior al lanzamiento, garantizando que el rendimiento real (Actual) se acople al rendimiento planeado (Plan) de la línea de forma acelerada.
+
+
+Consejos para tu defensa oral (Apoyo visual):
+
+En la Hoja 1: No leas el texto. Di algo como: "Como pueden ver, hoy tenemos ingenieros senior resolviendo problemas de nivel técnico. Esto no solo nos cuesta dinero en tiempo muerto, sino que frena la innovación. La IA nos permitirá delegar este conocimiento al técnico en segundos".
+En la Hoja 2: Enfócate en el beneficio del SIPOC y los KPIs. Demuestra que la base de datos ya existe (los errores ya están documentados), por lo que el Chatbot es solo el puente inteligente para explotar esa información.
